@@ -11,16 +11,16 @@ import se.fredsberg.game.random.ReverseScrambler;
 public class PoolTest {
 
     @Test
-    public void count() {
-        assertEquals(0, new Pool<Integer>().count());
+    public void getCount() {
+        assertEquals(0, new Pool<Integer>().getCount());
     }
 
     @Test
-    public void empty() {
+    public void isEmpty() {
         Pool<Integer> pool = new Pool<Integer>();
-        assertTrue(pool.empty());
+        assertTrue(pool.isEmpty());
         pool.add(6);
-        assertFalse(pool.empty());
+        assertFalse(pool.isEmpty());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -33,11 +33,11 @@ public class PoolTest {
     public void add() {
         Pool<Integer> pool = new Pool<Integer>();
         pool.add(6);
-        assertEquals(1, pool.count());
+        assertEquals(1, pool.getCount());
     }
 
     @Test
-    public void add_checkTheOrder() {
+    public void add_checkFifoOrder() {
         Pool<Integer> pool = new Pool<Integer>();
         pool.add(6);
         pool.add(9);
@@ -59,17 +59,17 @@ public class PoolTest {
     }
 
     @Test
-    public void pickOneAll() {
+    public void pickAll_shouldBeEmptyAfterwards() {
         Pool<Integer> pool = new Pool<Integer>();
         pool.add(6);
         List<Integer> all = pool.pickAll();
         assertEquals(1, all.size());
         assertEquals((Integer) 6, all.iterator().next());
-        assertEquals(0, pool.count());
+        assertEquals(0, pool.getCount());
     }
 
     @Test
-    public void shake() {
+    public void shake_inRevereseOrderWhenReverseScramblerIsUsed() {
         Pool<Integer> pool = new Pool<Integer>();
         pool.add(1);
         pool.add(2);

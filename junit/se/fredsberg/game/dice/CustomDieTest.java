@@ -14,12 +14,12 @@ import se.fredsberg.game.random.ReverseScrambler;
 public class CustomDieTest {
 
     @Test(expected = NullPointerException.class)
-    public void noSidesIsNotOK() {
+    public void constructor_noSidesIsNotOK() {
         new CustomDie<Integer>(null);
     }
 
     @Test
-    public void checknumberOfSidesAndDuplicatesCounts() {
+    public void constructor_checkCountOfNumberOfSidesAndDuplicates() {
         List<Float> singelSide = getSingleSide();
         assertEquals(1, new CustomDie<Float>(singelSide).getSize());
         List<Integer> duplicateSide = getDuplicateSides();
@@ -27,14 +27,14 @@ public class CustomDieTest {
     }
 
     @Test
-    public void unrolledDieShouldGiveFirstSideAsgetResult() {
+    public void getResult_unrolledDieShouldGiveFirstSideAsResult() {
         List<Float> sides = getSingleSide();
         CustomDie<Float> die = new CustomDie<Float>(sides);
         assertSame(sides.get(0), die.getResult());
     }
 
     @Test
-    public void modifyingOriginalListOfSidesShouldNotEffectDie() {
+    public void getResult_modifyingOriginalListOfSidesShouldNotEffectDie() {
         List<Integer> sides = getDuplicateSides();
         CustomDie<Integer> die = new CustomDie<Integer>(sides);
         Integer firstSide = sides.remove(0);
@@ -42,7 +42,7 @@ public class CustomDieTest {
     }
     
     @Test
-    public void reverseRollOfDieShouldGiveLastSideAtRollOfDie() {
+    public void getResult_reverseRollOfDieShouldGiveLastSideAtRollOfDie() {
         List<Integer> sides = getDuplicateSides();
         CustomDie<Integer> die = new CustomDie<Integer>(sides);
         die.roll(new ReverseScrambler());

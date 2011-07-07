@@ -21,7 +21,7 @@ public class Turn {
     }
 
     public int count(ZombieValue type) {
-        return piles.get(type).count();
+        return piles.get(type).getCount();
     }
 
     public boolean itsOver() {
@@ -59,7 +59,7 @@ public class Turn {
     }
 
     private ZombieDie getDie(Scrambler scrambler) {
-        if (cup.empty()) {
+        if (cup.isEmpty()) {
             overflowBrains += count(ZombieValue.BRAIN);
             resetDeck(scrambler);
         }
@@ -80,7 +80,4 @@ public class Turn {
         }
         cup.shake(scrambler);
     }
-
-    // public
-
 }

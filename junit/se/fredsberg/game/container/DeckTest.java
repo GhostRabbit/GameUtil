@@ -13,15 +13,15 @@ import se.fredsberg.game.random.ReverseScrambler;
 public class DeckTest {
 
     @Test
-    public void count() {
+    public void getCount() {
         Deck<Card> deck = new Deck<Card>();
-        assertEquals(0, deck.count());
+        assertEquals(0, deck.getCount());
         deck.putOnTop(new Card());
-        assertEquals(1, deck.count());
+        assertEquals(1, deck.getCount());
     }
 
     @Test(expected = EmptyException.class)
-    public void draw_deckOfOneCanDrawOnce() throws Exception {
+    public void draw_deckOfOneCanDrawOnlyOnce() throws Exception {
         Deck<Card> deck = new Deck<Card>();
         Card card = new Card();
         deck.putOnTop(card);
@@ -30,21 +30,21 @@ public class DeckTest {
     }
 
     @Test(expected = EmptyException.class)
-    public void draw_emptyDeckWouldResultInEmptyException() throws Exception {
+    public void draw_emptyDeckWouldResultInEmptyExceptionIfDrawn() throws Exception {
         Deck<Card> deck = new Deck<Card>();
         deck.draw();
     }
 
     @Test
-    public void empty() {
+    public void isEmpty() {
         Deck<Card> deck = new Deck<Card>();
-        assertTrue(deck.empty());
+        assertTrue(deck.isEmpty());
         deck.putOnTop(new Card());
-        assertFalse(deck.empty());
+        assertFalse(deck.isEmpty());
     }
 
     @Test
-    public void putBelow_anotherDeck() {
+    public void putBelow_orderOfAnotherDeck() {
         Deck<Card> deck = new Deck<Card>();
         Deck<Card> anotherDeck = new Deck<Card>();
         Card[] cards = newCardArray(4);
@@ -53,19 +53,19 @@ public class DeckTest {
         deck.putOnTop(cards[3]);
         deck.putOnTop(cards[2]);
         deck.putBelow(anotherDeck);
-        assertEquals(4, deck.count());
+        assertEquals(4, deck.getCount());
         assertDeckOrder(deck, cards, 2, 3, 0, 1);
-        assertEquals(0, anotherDeck.count());
+        assertEquals(0, anotherDeck.getCount());
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void putBelow_deck_NullNotAcceptable() {
+    public void putBelow_deck_nullNotAcceptable() {
         Deck<Card> deck = new Deck<Card>();
         deck.putBelow((Deck<Card>) null);
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void putBelow_item_NullNotAcceptable() {
+    public void putBelow_item_nullNotAcceptable() {
         Deck<Card> deck = new Deck<Card>();
         deck.putBelow((Card) null);
     }
@@ -81,7 +81,7 @@ public class DeckTest {
     }
 
     @Test
-    public void putOnTop_anotherDeck() {
+    public void putOnTop_orderOfAnotherDeck() {
         Deck<Card> deck = new Deck<Card>();
         Deck<Card> anotherDeck = new Deck<Card>();
         Card[] cards = newCardArray(4);
@@ -90,9 +90,9 @@ public class DeckTest {
         deck.putOnTop(cards[3]);
         deck.putOnTop(cards[2]);
         deck.putOnTop(anotherDeck);
-        assertEquals(4, deck.count());
+        assertEquals(4, deck.getCount());
         assertDeckOrder(deck, cards, 0, 1, 2, 3);
-        assertEquals(0, anotherDeck.count());
+        assertEquals(0, anotherDeck.getCount());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -108,16 +108,16 @@ public class DeckTest {
     }
 
     @Test
-    public void putOnTop_orderOfTwoItems() throws Exception {
+    public void putOnTop_orderOfTwoItemsAddedOnTop() throws Exception {
         Deck<Card> deck = new Deck<Card>();
         Card[] cards = newCardArray(2);
         deck.putOnTop(cards[0]);
         deck.putOnTop(cards[1]);
         assertDeckOrder(deck, cards, 1, 0);
     }
-    
+
     @Test
-    public void shuffle() {
+    public void shuffle_inReverseOrderAfterRevereScrambling() {
         Deck<Card> deck = new Deck<Card>();
         Card[] cards = newCardArray(2);
         deck.putOnTop(cards[0]);
@@ -127,7 +127,7 @@ public class DeckTest {
     }
 
     @Test
-    public void shake() {
+    public void shake_doesNothing() {
         Deck<Card> deck = new Deck<Card>();
         Card[] cards = newCardArray(2);
         deck.putOnTop(cards[0]);

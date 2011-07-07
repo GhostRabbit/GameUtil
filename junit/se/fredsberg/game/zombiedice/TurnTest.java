@@ -14,9 +14,9 @@ import se.fredsberg.game.random.Scrambler;
 public class TurnTest {
 
     // Not a best test here. Uses internal order of ZombieDie
-
+    
     @Test
-    public void initialState() {
+    public void createTurn_initialState() {
         Turn turn = new TurnFactory().createTurn();
         assertEquals(0, turn.count(ZombieValue.BRAIN));
         assertEquals(0, turn.count(ZombieValue.FOOTPRINTS));
@@ -48,7 +48,7 @@ public class TurnTest {
     }
 
     @Test
-    public void score_afterManyGoodRolls() {
+    public void score_manyGoodRollsShouldUseBrainOverflowCounter() {
         Turn turn = new TurnFactory().createTurn();
         Scrambler onlyBrainsScrambler = new FixedScrambler(0);
         assertBrainsAndScore(turn, 0, 0);
@@ -77,68 +77,69 @@ public class TurnTest {
     }
 
     @Test
-        public void keepGoing_useFootPrints() {
-            Pool<ZombieDie> cup = new Pool<ZombieDie>();
-            ZombieDieFactory dieFactory = new ZombieDieFactory();
-            cup.add(dieFactory.greenZombieDie());
-            cup.add(dieFactory.greenZombieDie());
-            cup.add(dieFactory.greenZombieDie());
-            cup.add(dieFactory.yellowZombieDie());
-            cup.add(dieFactory.greenZombieDie());
-            cup.add(dieFactory.yellowZombieDie());
-            Turn turn = new Turn(cup, new TurnFactory().createPiles());
-            // 2 on yellow == Footprints, 2 on green == Brain
-            Scrambler mixedFootprintsAndBrains = new FixedScrambler(2);
-            turn.keepGoing(mixedFootprintsAndBrains);
-            assertEquals(3, turn.score());
-            turn.keepGoing(mixedFootprintsAndBrains);
-            assertEquals(4, turn.score());
-            assertEquals(2, turn.count(ZombieValue.FOOTPRINTS));
-            turn.keepGoing(mixedFootprintsAndBrains);
-            assertEquals(5, turn.score());
-            assertEquals(2, turn.count(ZombieValue.FOOTPRINTS));
-        }
+    public void keepGoing_useFootPrints() {
+        Pool<ZombieDie> cup = new Pool<ZombieDie>();
+        ZombieDieFactory dieFactory = new ZombieDieFactory();
+        cup.add(dieFactory.greenZombieDie());
+        cup.add(dieFactory.greenZombieDie());
+        cup.add(dieFactory.greenZombieDie());
+        cup.add(dieFactory.yellowZombieDie());
+        cup.add(dieFactory.greenZombieDie());
+        cup.add(dieFactory.yellowZombieDie());
+        Turn turn = new Turn(cup, new TurnFactory().createPiles());
+        // 2 on yellow == Footprints, 2 on green == Brain
+        Scrambler mixFootprintsAndBrains = new FixedScrambler(2);
+        turn.keepGoing(mixFootprintsAndBrains);
+        assertEquals(3, turn.score());
+        turn.keepGoing(mixFootprintsAndBrains);
+        assertEquals(4, turn.score());
+        assertEquals(2, turn.count(ZombieValue.FOOTPRINTS));
+        turn.keepGoing(mixFootprintsAndBrains);
+        assertEquals(5, turn.score());
+        assertEquals(2, turn.count(ZombieValue.FOOTPRINTS));
+    }
 
     @Test
-        public void keepGoing_sholdShakeCupAfterOverflow() {
-            class ShakeCountedPool<T> extends Pool<T> {
-    
-                public int shakeCounter;
-    
-                @Override
-                public void shake(Scrambler scrambler) {
-                    shakeCounter++;
-                }
+    public void keepGoing_sholdShakeCupAfterOverflow() {
+        class ShakeCountedPool<T> extends Pool<T> {
+
+            public int shakeCounter;
+
+            @Override
+            public void shake(Scrambler scrambler) {
+                shakeCounter++;
             }
-            ShakeCountedPool<ZombieDie> cup = new ShakeCountedPool<ZombieDie>();
-            ZombieDieFactory dieFactory = new ZombieDieFactory();
-            cup.add(dieFactory.greenZombieDie());
-            cup.add(dieFactory.greenZombieDie());
-            cup.add(dieFactory.greenZombieDie());
-            Turn turn = new Turn(cup, new TurnFactory().createPiles());
-            Scrambler onlyBrains = new FixedScrambler(0);
-            turn.keepGoing(onlyBrains);
-            assertEquals(0, cup.shakeCounter);
-            turn.keepGoing(onlyBrains);
-            assertEquals(1, cup.shakeCounter);
         }
+        ShakeCountedPool<ZombieDie> cup = new ShakeCountedPool<ZombieDie>();
+        ZombieDieFactory dieFactory = new ZombieDieFactory();
+        cup.add(dieFactory.greenZombieDie());
+        cup.add(dieFactory.greenZombieDie());
+        cup.add(dieFactory.greenZombieDie());
+        Turn turn = new Turn(cup, new TurnFactory().createPiles());
+        Scrambler onlyBrains = new FixedScrambler(0);
+        turn.keepGoing(onlyBrains);
+        assertEquals(0, cup.shakeCounter);
+        turn.keepGoing(onlyBrains);
+        assertEquals(1, cup.shakeCounter);
+    }
 
     @Test
     public void count_deadAfter3Shotguns() {
         Turn turn = new TurnFactory().createTurn();
-        Scrambler onlyShotgunsScrambler = new FixedScrambler(5);
-        turn.keepGoing(onlyShotgunsScrambler);
+        Scrambler onlyShotguns = new FixedScrambler(5);
+        turn.keepGoing(onlyShotguns);
         assertEquals(3, turn.count(ZombieValue.SHOOTGUN));
         assertTrue(turn.itsOver());
     }
 
     @Test(expected = IllegalStateException.class)
-        public void keepGoing_whenDead() {
-            Turn turn = new TurnFactory().createTurn();
-            Scrambler onlyShotgunsScrambler = new FixedScrambler(5);
-            turn.keepGoing(onlyShotgunsScrambler);
-            turn.keepGoing(onlyShotgunsScrambler);
-        }
+    public void keepGoing_whenDead() {
+        Turn turn = new TurnFactory().createTurn();
+        Scrambler onlyShotguns = new FixedScrambler(5);
+        turn.keepGoing(onlyShotguns);
+        // Now dead
+        turn.keepGoing(onlyShotguns);
+    }
 
     @Test(expected = IllegalStateException.class)
     public void stop_noMoreRollsAllowed() {

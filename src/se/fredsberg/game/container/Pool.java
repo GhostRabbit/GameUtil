@@ -18,11 +18,11 @@ public class Pool<T> {
         list.add(x);
     }
 
-    public int count() {
+    public int getCount() {
         return list.size();
     }
 
-    public boolean empty() {
+    public boolean isEmpty() {
         return list.isEmpty();
     }
 

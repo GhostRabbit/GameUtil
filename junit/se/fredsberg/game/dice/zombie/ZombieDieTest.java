@@ -6,25 +6,24 @@ import java.awt.Color;
 
 import org.junit.Test;
 
-
 public class ZombieDieTest {
 
     @Test
-    public void redZombieDieProperties() {
+    public void redZombieDie_properties() {
         ZombieDie red = new ZombieDieFactory().redZombieDie();
         assertEquals(Color.RED, red.getColor());
         assertZombieDieSides(red, 1, 3, 2);
     }
 
     @Test
-    public void yellowZombieDieProperties() {
+    public void yellowZombieDie_properties() {
         ZombieDie yellow = new ZombieDieFactory().yellowZombieDie();
         assertEquals(Color.YELLOW, yellow.getColor());
         assertZombieDieSides(yellow, 2, 2, 2);
     }
 
     @Test
-    public void greenZombieDieProperties() {
+    public void greenZombieDie_properties() {
         ZombieDie green = new ZombieDieFactory().greenZombieDie();
         assertEquals(Color.GREEN, green.getColor());
         assertZombieDieSides(green, 3, 1, 2);
