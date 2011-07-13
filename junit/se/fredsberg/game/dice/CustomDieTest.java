@@ -42,7 +42,7 @@ public class CustomDieTest {
     }
     
     @Test
-    public void getResult_reverseRollOfDieShouldGiveLastSideAtRollOfDie() {
+    public void getResult_reverseScramblerShouldGiveLastSideWhenRolled() {
         List<Integer> sides = getDuplicateSides();
         CustomDie<Integer> die = new CustomDie<Integer>(sides);
         die.roll(new ReverseScrambler());

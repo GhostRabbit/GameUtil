@@ -28,8 +28,8 @@ public class TurnTest {
     @Test
     public void score_afterOneGoodRoll() {
         Turn turn = new TurnFactory().createTurn();
-        Scrambler onlyBrainsScrambler = new FixedScrambler(0);
-        turn.keepGoing(onlyBrainsScrambler);
+        Scrambler onlyBrains = new FixedScrambler(0);
+        turn.keepGoing(onlyBrains);
         assertEquals(3, turn.count(ZombieValue.BRAIN));
         assertEquals(3, turn.score());
     }
@@ -37,12 +37,12 @@ public class TurnTest {
     @Test
     public void score_whenDead() {
         Turn turn = new TurnFactory().createTurn();
-        Scrambler onlyBrainsScrambler = new FixedScrambler(0);
-        turn.keepGoing(onlyBrainsScrambler);
+        Scrambler onlyBrains = new FixedScrambler(0);
+        turn.keepGoing(onlyBrains);
         assertEquals(3, turn.count(ZombieValue.BRAIN));
         assertEquals(3, turn.score());
-        Scrambler onlyShootgunScrambler = new FixedScrambler(5);
-        turn.keepGoing(onlyShootgunScrambler);
+        Scrambler onlyShootguns = new FixedScrambler(5);
+        turn.keepGoing(onlyShootguns);
         assertTrue(turn.itsOver());
         assertEquals(0, turn.score());
     }
@@ -50,29 +50,29 @@ public class TurnTest {
     @Test
     public void score_manyGoodRollsShouldUseBrainOverflowCounter() {
         Turn turn = new TurnFactory().createTurn();
-        Scrambler onlyBrainsScrambler = new FixedScrambler(0);
+        Scrambler onlyBrains = new FixedScrambler(0);
         assertBrainsAndScore(turn, 0, 0);
-        turn.keepGoing(onlyBrainsScrambler);
+        turn.keepGoing(onlyBrains);
         assertBrainsAndScore(turn, 3, 3);
-        turn.keepGoing(onlyBrainsScrambler);
+        turn.keepGoing(onlyBrains);
         assertBrainsAndScore(turn, 6, 6);
-        turn.keepGoing(onlyBrainsScrambler);
+        turn.keepGoing(onlyBrains);
         assertBrainsAndScore(turn, 9, 9);
-        turn.keepGoing(onlyBrainsScrambler);
+        turn.keepGoing(onlyBrains);
         assertBrainsAndScore(turn, 12, 12);
         // First overflow
-        turn.keepGoing(onlyBrainsScrambler);
+        turn.keepGoing(onlyBrains);
         assertBrainsAndScore(turn, 3, 15);
-        turn.keepGoing(onlyBrainsScrambler);
+        turn.keepGoing(onlyBrains);
         assertBrainsAndScore(turn, 6, 18);
-        turn.keepGoing(onlyBrainsScrambler);
+        turn.keepGoing(onlyBrains);
         assertBrainsAndScore(turn, 9, 21);
-        turn.keepGoing(onlyBrainsScrambler);
+        turn.keepGoing(onlyBrains);
         assertBrainsAndScore(turn, 12, 24);
-        turn.keepGoing(onlyBrainsScrambler);
+        turn.keepGoing(onlyBrains);
         // Second overflow
         assertBrainsAndScore(turn, 3, 27);
-        turn.keepGoing(onlyBrainsScrambler);
+        turn.keepGoing(onlyBrains);
         assertBrainsAndScore(turn, 6, 30);
     }
 
