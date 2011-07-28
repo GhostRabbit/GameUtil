@@ -41,8 +41,7 @@ public class PoolTest {
         Pool<Integer> pool = new Pool<Integer>();
         pool.add(6);
         pool.add(9);
-        assertEquals((Integer) 6, pool.pickOne());
-        assertEquals((Integer) 9, pool.pickOne());
+        assertPoolOrder(pool, 6, 9);
     }
 
     @Test(expected = EmptyException.class)
@@ -65,7 +64,7 @@ public class PoolTest {
         List<Integer> all = pool.pickAll();
         assertEquals(1, all.size());
         assertEquals((Integer) 6, all.iterator().next());
-        assertEquals(0, pool.getCount());
+        assertTrue(pool.isEmpty());
     }
 
     @Test

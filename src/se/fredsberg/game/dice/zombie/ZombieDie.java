@@ -15,3 +15,4 @@ public class ZombieDie extends ColoredDie<ZombieValue> {
         return sides;
     }
 }
+ 
