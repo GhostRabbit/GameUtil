@@ -1,7 +1,3 @@
-/**
- *
- */
-
 function ZombieDieFactory() {
 	this.getRedZombieSides = function() {
 		return [ZombieValue.values.BRAIN, 

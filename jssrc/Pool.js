@@ -1,7 +1,3 @@
-/**
- * 
- */
-
 function Pool() {
 	this.list = new Array();
 };

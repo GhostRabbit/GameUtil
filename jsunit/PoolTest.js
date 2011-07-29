@@ -1,7 +1,3 @@
-/**
- * 
- */
-
 PoolTest = TestCase("poolTest");
 
 PoolTest.prototype.testGetCount = function() {
@@ -57,4 +53,3 @@ PoolTest.prototype.testShake_inRevereseOrderWhenReverseScramblerIsUsed = functio
 	assertEquals(2, pool.pickOne());
 	assertEquals(1, pool.pickOne());
 };
-

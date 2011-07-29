@@ -1,7 +1,3 @@
-/**
- *
- */
-
 RandomScramblerTest = TestCase("randomScramblerTest");
 
 RandomScramblerTest.prototype.testRandom = function() {

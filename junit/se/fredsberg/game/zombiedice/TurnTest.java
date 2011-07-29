@@ -39,7 +39,6 @@ public class TurnTest {
         Turn turn = new TurnFactory().createTurn();
         Scrambler onlyBrains = new FixedScrambler(0);
         turn.keepGoing(onlyBrains);
-        assertEquals(3, turn.count(ZombieValue.BRAIN));
         assertEquals(3, turn.score());
         Scrambler onlyShootguns = new FixedScrambler(5);
         turn.keepGoing(onlyShootguns);
