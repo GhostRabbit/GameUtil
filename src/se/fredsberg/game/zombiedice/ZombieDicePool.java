@@ -8,7 +8,7 @@ public class ZombieDicePool extends Pool<ZombieDie>{
 
     private static final int RED_DICE_COUNT = 3;
     private static final int YELLOW_DICE_COUNT = 4;
-    private static final int GREEN_DICE_COUNT = 5;
+    private static final int GREEN_DICE_COUNT = 6;
 
     public ZombieDicePool() {
         ZombieDieFactory dieFactory = new ZombieDieFactory();

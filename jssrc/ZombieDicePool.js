@@ -17,4 +17,5 @@ function ZombieDicePool() {
 	this.add(dieFactory.greenZombieDie());
 	this.add(dieFactory.greenZombieDie());
 	this.add(dieFactory.greenZombieDie());
+	this.add(dieFactory.greenZombieDie());
 }; 
