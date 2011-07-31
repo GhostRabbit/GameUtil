@@ -1,42 +1,39 @@
-function ZombieDieFactory() {
-	this.getRedZombieSides = function() {
-		return [ZombieValue.values.BRAIN, 
-		        ZombieValue.values.FOOTPRINTS,
-		        ZombieValue.values.FOOTPRINTS,
-		        ZombieValue.values.SHOOTGUN,
-		        ZombieValue.values.SHOOTGUN,
-		        ZombieValue.values.SHOOTGUN];
-	};
-
-	this.getYellowZombieSides = function() {
-		return [ZombieValue.values.BRAIN,
-		        ZombieValue.values.BRAIN,
-		        ZombieValue.values.FOOTPRINTS,
-		        ZombieValue.values.FOOTPRINTS,
-		        ZombieValue.values.SHOOTGUN,
-		        ZombieValue.values.SHOOTGUN];
-	};
-
-	this.getGreenZombieSides = function() {
-		return [ZombieValue.values.BRAIN,
-		        ZombieValue.values.BRAIN,
-		        ZombieValue.values.BRAIN,
-		        ZombieValue.values.FOOTPRINTS,
-		        ZombieValue.values.FOOTPRINTS,
-		        ZombieValue.values.SHOOTGUN];
-	};
-};
-
-ZombieDieFactory.prototype.redZombieDie = function() {
-	return new ZombieDie(Color.colors.RED, this.getRedZombieSides());
-};
-
-ZombieDieFactory.prototype.yellowZombieDie = function() {
-	return new ZombieDie(Color.colors.YELLOW, this.getYellowZombieSides());
-};
-
-ZombieDieFactory.prototype.greenZombieDie = function() {
-	return new ZombieDie(Color.colors.GREEN, this.getGreenZombieSides());
-};
-
-
+var BackBone = require('backbone');
+var Color = require('./Color.js');
+var ZombieDie = require('./ZombieDie.js');
+var ZombieValue = require('./ZombieValue.js');
+var ZombieDieFactory = BackBone.Model.extend({
+    initialize: function() {
+        this.getRedZombieSides = function() {
+            var z = new ZombieValue();
+            return [z.values.BRAIN, z.values.FOOTPRINTS, z.values.FOOTPRINTS, z.values.SHOOTGUN, z.values.SHOOTGUN, z.values.SHOOTGUN];
+        };
+        this.getYellowZombieSides = function() {
+            var z = new ZombieValue();
+            return [z.values.BRAIN, z.values.BRAIN, z.values.FOOTPRINTS, z.values.FOOTPRINTS, z.values.SHOOTGUN, z.values.SHOOTGUN];
+        };
+        this.getGreenZombieSides = function() {
+            var z = new ZombieValue();
+            return [z.values.BRAIN, z.values.BRAIN, z.values.BRAIN, z.values.FOOTPRINTS, z.values.FOOTPRINTS, z.values.SHOOTGUN];
+        };
+    },
+    redZombieDie: function() {
+        return new ZombieDie({
+            color: new Color().colors.RED,
+            sides: this.getRedZombieSides()
+        });
+    },
+    yellowZombieDie: function() {
+        return new ZombieDie({
+            color: new Color().colors.YELLOW,
+            sides: this.getYellowZombieSides()
+        });
+    },
+    greenZombieDie: function() {
+        return new ZombieDie({
+            color: new Color().colors.GREEN,
+            sides: this.getGreenZombieSides()
+        });
+    }
+});
+module.exports = ZombieDieFactory;
