@@ -1,5 +1,5 @@
 var assert = require('assert');
-var CustomDie = require('../jssrc/CustomDie.js');
+var CustomDie = require('../lib/CustomDie.js');
 var ReverseScrambler = require('./ReverseScrambler.js');
 module.exports = {
     'GetResult_unrolledDieShouldGiveFirstSideAsResult': function() {

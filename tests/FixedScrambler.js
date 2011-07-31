@@ -7,5 +7,5 @@ var FixedScrambler = BackBone.Model.extend({
         return this.value % upperExclusiveLimit;
     },
     scramble: function(list) {}
-})
+});
 module.exports = FixedScrambler;
