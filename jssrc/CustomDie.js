@@ -1,3 +1,18 @@
+var BackBone = require('backbone');
+
+var CustomDie = BackBone.Model.extend( {
+    initialize: function(options) {
+        this.selectedSideIndex = 0;
+        this.color = options[color];
+	    this.sides = options[sides].slice();
+    }
+}
+);
+
+module.exports = {
+};
+
+/*
 function CustomDie(color, sides) {
 	this.selectedSideIndex = 0;
 	this.color = color;
@@ -6,7 +21,7 @@ function CustomDie(color, sides) {
 	this.selectedSide = function() {
 		return this.selectedSideIndex;
 	};
-};
+}
 
 CustomDie.prototype.getColor = function() {
 	return this.color;
@@ -23,3 +38,4 @@ CustomDie.prototype.getResult = function() {
 CustomDie.prototype.roll = function(scrambler) {
 	this.selectedSideIndex = scrambler.random(this.getSize());
 };
+*/
