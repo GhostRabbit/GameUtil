@@ -15,13 +15,13 @@ function Turn(cup, piles) {
 	this.getDie = function(scrambler) {
 		if (this.cup.isEmpty()) {
 			this.overflowBrains += this.count(ZombieValue.values.BRAIN);
-			this.resetDeck(scrambler);
+			this.refillCup(scrambler);
 		}
 
 		return this.cup.pickOne();
 	};
 
-	this.resetDeck = function(scrambler) {
+	this.refillCup = function(scrambler) {
 		var brains = piles[ZombieValue.values.BRAIN].pickAll();
 		for ( var i = 0; i < brains.length; i++) {
 			this.cup.add(brains[i]);
