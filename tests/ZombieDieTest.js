@@ -5,10 +5,10 @@ var Color = require('../lib/Color.js');
 module.exports = {
     'Red ZombieDie properties': function() {
         var red = new ZombieDieFactory().redZombieDie();
-        assert.equal(new Color().colors.RED, red.getColor());
+        assert.equal(Color.colors.RED, red.getColor());
         assert.equal(6, red.getSize());
         var sides = red.getSides();
-        var z = new ZombieValue();
+        var z = ZombieValue;
         assert.equal(z.values.BRAIN, sides[0]);
         assert.equal(z.values.FOOTPRINTS, sides[1]);
         assert.equal(z.values.FOOTPRINTS, sides[2]);
@@ -18,10 +18,10 @@ module.exports = {
     },
     'Yellow ZombieDie properties': function() {
         var yellow = new ZombieDieFactory().yellowZombieDie();
-        assert.equal(new Color().colors.YELLOW, yellow.getColor());
+        assert.equal(Color.colors.YELLOW, yellow.getColor());
         assert.equal(6, yellow.getSize());
         var sides = yellow.getSides();
-        var z = new ZombieValue();
+        var z = ZombieValue;
         assert.equal(z.values.BRAIN, sides[0]);
         assert.equal(z.values.BRAIN, sides[1]);
         assert.equal(z.values.FOOTPRINTS, sides[2]);
@@ -31,10 +31,10 @@ module.exports = {
     },
     'Green ZombieDie properties': function() {
         var green = new ZombieDieFactory().greenZombieDie();
-        assert.equal(new Color().colors.GREEN, green.getColor());
+        assert.equal(Color.colors.GREEN, green.getColor());
         assert.equal(6, green.getSize());
         var sides = green.getSides();
-        var z = new ZombieValue();
+        var z = ZombieValue;
         assert.equal(z.values.BRAIN, sides[0]);
         assert.equal(z.values.BRAIN, sides[1]);
         assert.equal(z.values.BRAIN, sides[2]);

@@ -6,7 +6,7 @@ var FixedScrambler = require('./FixedScrambler.js');
 module.exports = {
     'initial state of Turn': function() {
         var turn = new TurnFactory().createTurn();
-        var z = new ZombieValue();
+        var z = ZombieValue;
         assert.equal(0, turn.count(z.values.BRAIN));
         assert.equal(0, turn.count(z.values.FOOTPRINTS));
         assert.equal(0, turn.count(z.values.SHOOTGUN));
@@ -17,7 +17,7 @@ module.exports = {
             value: 0
         });
         turn.keepGoing(onlyBrainsScrambler);
-        assert.equal(3, turn.count(new ZombieValue().values.BRAIN));
+        assert.equal(3, turn.count(ZombieValue.values.BRAIN));
         assert.equal(3, turn.score());
     },
     'Score when dead': function() {
@@ -69,12 +69,12 @@ module.exports = {
             value: 5
         });
         turn.keepGoing(onlyShotgunScrambler);
-        assert.equal(3, turn.count(new ZombieValue().values.SHOOTGUN));
+        assert.equal(3, turn.count(ZombieValue.values.SHOOTGUN));
         assert.equal(true, turn.itsOver());
     }
 };
 
 function assertBrainsAndScore(turn, brains, score) {
-    assert.equal(brains, turn.count(new ZombieValue().values.BRAIN));
+    assert.equal(brains, turn.count(ZombieValue.values.BRAIN));
     assert.equal(score, turn.score());
 }
