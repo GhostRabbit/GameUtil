@@ -6,9 +6,9 @@ var FixedScrambler = require('./FixedScrambler.js');
 module.exports = {
     'initial state of Turn': function() {
         var turn = new TurnFactory().createTurn();
-        assert.equal(0, turn.brains());
-        assert.equal(0, turn.footprints());
-        assert.equal(0, turn.shootguns());
+        assert.equal(turn.brains(), 0);
+        assert.equal(turn.footprints(), 0);
+        assert.equal(turn.shootguns(), 0);
     },
     'Score after one good roll': function() {
         var turn = new TurnFactory().createTurn();
@@ -16,8 +16,8 @@ module.exports = {
             value: 0
         });
         turn.keepGoing(onlyBrainsScrambler);
-        assert.equal(3, turn.brains());
-        assert.equal(3, turn.score());
+        assert.equal(turn.brains(), 3);
+        assert.equal(turn.score(), 3);
     },
     'Score when dead': function() {
         var turn = new TurnFactory().createTurn();
@@ -25,13 +25,13 @@ module.exports = {
             value: 0
         });
         turn.keepGoing(onlyBrainsScrambler);
-        assert.equal(3, turn.score());
+        assert.equal(turn.score(), 3);
         var onlyShootgunScrambler = new FixedScrambler({
             value: 5
         });
         turn.keepGoing(onlyShootgunScrambler);
-        assert.equal(true, turn.itsOver());
-        assert.equal(0, turn.score());
+        assert.ok(turn.itsOver());
+        assert.equal(turn.score(), 0);
     },
     'many good rolls should use brain overflow counter': function() {
         var turn = new TurnFactory().createTurn();
@@ -68,12 +68,12 @@ module.exports = {
             value: 5
         });
         turn.keepGoing(onlyShotgunScrambler);
-        assert.equal(3, turn.shootguns());
-        assert.equal(true, turn.itsOver());
+        assert.equal(turn.shootguns(), 3);
+        assert.ok(turn.itsOver());
     }
 };
 
 function assertBrainsAndScore(turn, brains, score) {
-    assert.equal(brains, turn.brains());
-    assert.equal(score, turn.score());
+    assert.equal(turn.brains(), brains);
+    assert.equal(turn.score(), score);
 }

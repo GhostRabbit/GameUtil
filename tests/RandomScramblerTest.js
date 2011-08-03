@@ -8,9 +8,9 @@ module.exports = {
         for (var i = 0; i < 20; i++) {
             results[scrambler.random(2)]++;
         }
-        assert.equal(true, results[0] > 0);
-        assert.equal(true, results[1] > 0);
-        assert.equal(0, results[2]);
+        assert.ok(results[0] > 0);
+        assert.ok(results[1] > 0);
+        assert.equal(results[2], 0);
     },
     'test Scramble': function() {
         var results = [0, 0];
@@ -20,7 +20,7 @@ module.exports = {
             scrambler.scramble(arr);
             results[arr[0]]++;
         }
-        assert.equal(true, results[0] > 0);
-        assert.equal(true, results[1] > 0);
+        assert.ok(results[0] > 0);
+        assert.ok(results[1] > 0);
     }
 };

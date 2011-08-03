@@ -2,44 +2,46 @@ var assert = require('assert');
 var ZombieDieFactory = require('../lib/ZombieDieFactory.js');
 var ZombieValue = require('../lib/ZombieValue.js');
 var Color = require('../lib/Color.js');
+
+var brain = ZombieValue.values.BRAIN;
+var footprints = ZombieValue.values.FOOTPRINTS;
+var shootgun = ZombieValue.values.SHOOTGUN;
+
 module.exports = {
     'Red ZombieDie properties': function() {
         var red = new ZombieDieFactory().redZombieDie();
         assert.equal(Color.colors.RED, red.getColor());
         assert.equal(6, red.getSize());
         var sides = red.getSides();
-        var z = ZombieValue;
-        assert.equal(z.values.BRAIN, sides[0]);
-        assert.equal(z.values.FOOTPRINTS, sides[1]);
-        assert.equal(z.values.FOOTPRINTS, sides[2]);
-        assert.equal(z.values.SHOOTGUN, sides[3]);
-        assert.equal(z.values.SHOOTGUN, sides[4]);
-        assert.equal(z.values.SHOOTGUN, sides[5]);
+        assert.equal(sides[0], brain);
+        assert.equal(sides[1], footprints);
+        assert.equal(sides[2], footprints);
+        assert.equal(sides[3], shootgun);
+        assert.equal(sides[4], shootgun);
+        assert.equal(sides[5], shootgun);
     },
     'Yellow ZombieDie properties': function() {
         var yellow = new ZombieDieFactory().yellowZombieDie();
         assert.equal(Color.colors.YELLOW, yellow.getColor());
         assert.equal(6, yellow.getSize());
         var sides = yellow.getSides();
-        var z = ZombieValue;
-        assert.equal(z.values.BRAIN, sides[0]);
-        assert.equal(z.values.BRAIN, sides[1]);
-        assert.equal(z.values.FOOTPRINTS, sides[2]);
-        assert.equal(z.values.FOOTPRINTS, sides[3]);
-        assert.equal(z.values.SHOOTGUN, sides[4]);
-        assert.equal(z.values.SHOOTGUN, sides[5]);
+        assert.equal(sides[0], brain);
+        assert.equal(sides[1], brain);
+        assert.equal(sides[2], footprints);
+        assert.equal(sides[3], footprints);
+        assert.equal(sides[4], shootgun);
+        assert.equal(sides[5], shootgun);
     },
     'Green ZombieDie properties': function() {
         var green = new ZombieDieFactory().greenZombieDie();
         assert.equal(Color.colors.GREEN, green.getColor());
         assert.equal(6, green.getSize());
         var sides = green.getSides();
-        var z = ZombieValue;
-        assert.equal(z.values.BRAIN, sides[0]);
-        assert.equal(z.values.BRAIN, sides[1]);
-        assert.equal(z.values.BRAIN, sides[2]);
-        assert.equal(z.values.FOOTPRINTS, sides[3]);
-        assert.equal(z.values.FOOTPRINTS, sides[4]);
-        assert.equal(z.values.SHOOTGUN, sides[5]);
+        assert.equal(sides[0], brain);
+        assert.equal(sides[1], brain);
+        assert.equal(sides[2], brain);
+        assert.equal(sides[3], footprints);
+        assert.equal(sides[4], footprints);
+        assert.equal(sides[5], shootgun);
     }
 };

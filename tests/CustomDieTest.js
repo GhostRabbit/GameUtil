@@ -7,7 +7,7 @@ module.exports = {
             color: null,
             sides: [3]
         });
-        assert.equal(3, die.getResult());
+        assert.equal(die.getResult(), 3);
     },
     'GetResult_modifyingOriginalListOfSidesShouldNotEffectDie': function() {
         var sides = [3, 5];
@@ -16,7 +16,7 @@ module.exports = {
             sides: sides
         });
         sides[0] = 7;
-        assert.equal(3, die.getResult());
+        assert.equal(die.getResult(), 3);
     },
     'GetResult_reverseScramblerShouldGiveLastSideWhenRolled': function() {
         var die = new CustomDie({
@@ -24,6 +24,6 @@ module.exports = {
             sides: [3, 5]
         });
         die.roll(new ReverseScrambler());
-        assert.equal(5, die.getResult());
+        assert.equal(die.getResult(), 5);
     }
 };
