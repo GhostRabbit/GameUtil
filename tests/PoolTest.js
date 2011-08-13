@@ -39,7 +39,7 @@ module.exports = {
     'PickOne returns undefined if Pool is empty': function() {
         assert.equal(pool.pickOne(), undefined);
     },
-    'Pool should be n reverse order after Shake with a ReverseScrambler': function() {
+    'Pool should be in reverse order after Shake with a ReverseScrambler': function() {
         pool.add(1);
         pool.add(2);
         pool.shake(new ReverseScrambler());

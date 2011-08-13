@@ -5,7 +5,7 @@ var Color = require('../lib/Color.js');
 
 var brain = ZombieValue.values.BRAIN;
 var footprints = ZombieValue.values.FOOTPRINTS;
-var shootgun = ZombieValue.values.SHOOTGUN;
+var shotgun = ZombieValue.values.SHOTGUN;
 
 module.exports = {
     'Red ZombieDie properties': function() {
@@ -16,9 +16,9 @@ module.exports = {
         assert.equal(sides[0], brain);
         assert.equal(sides[1], footprints);
         assert.equal(sides[2], footprints);
-        assert.equal(sides[3], shootgun);
-        assert.equal(sides[4], shootgun);
-        assert.equal(sides[5], shootgun);
+        assert.equal(sides[3], shotgun);
+        assert.equal(sides[4], shotgun);
+        assert.equal(sides[5], shotgun);
     },
     'Yellow ZombieDie properties': function() {
         var yellow = new ZombieDieFactory().yellowZombieDie();
@@ -29,8 +29,8 @@ module.exports = {
         assert.equal(sides[1], brain);
         assert.equal(sides[2], footprints);
         assert.equal(sides[3], footprints);
-        assert.equal(sides[4], shootgun);
-        assert.equal(sides[5], shootgun);
+        assert.equal(sides[4], shotgun);
+        assert.equal(sides[5], shotgun);
     },
     'Green ZombieDie properties': function() {
         var green = new ZombieDieFactory().greenZombieDie();
@@ -42,6 +42,6 @@ module.exports = {
         assert.equal(sides[2], brain);
         assert.equal(sides[3], footprints);
         assert.equal(sides[4], footprints);
-        assert.equal(sides[5], shootgun);
+        assert.equal(sides[5], shotgun);
     }
 };

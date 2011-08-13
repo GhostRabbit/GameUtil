@@ -24,7 +24,8 @@ module.exports = {
 };
 
 function count(pool, color) {
-    return pool.list.filter(function(die) {
+    var matchesColor = function(die) {
         return die.getColor() == color;
-    }).length;
+    };
+    return pool.list.filter(matchesColor).length;
 }
