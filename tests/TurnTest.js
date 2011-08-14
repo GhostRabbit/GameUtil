@@ -3,6 +3,7 @@ var Turn = require('../lib/Turn.js');
 var TurnFactory = require('../lib/TurnFactory.js');
 var ZombieValue = require('../lib/ZombieValue.js');
 var FixedScrambler = require('./FixedScrambler.js');
+var Color = require('../lib/Color.js');
 
 var turn;
 var onlyBrainScrambler;
@@ -62,7 +63,7 @@ module.exports = {
         assert.equal(status.shotguns.length, 3);
     },
     'Footprints should be used when rolling': function() {
-        turn = new TurnFactory().createTurn(new FixedScrambler({value: 100})); // Do not scramble the cup please.
+        var turn = unscrambledTurn();
         turn.keepGoing(onlyFootprintScrambler);
         assert.equal(turn.cup.list.length, 10);
         assert.equal(turn.footprints(), 3);
@@ -108,7 +109,7 @@ module.exports = {
         assert.equal(status.shotguns.length, 3);
     },
     'Status should be immutable from turn state': function() {
-        turn = new TurnFactory().createTurn(new FixedScrambler({value: 100})); // Do not scramble the cup please.
+        var turn = unscrambledTurn();
         var status = turn.status();
         turn.keepGoing(onlyBrainScrambler);
         assert.equal(turn.brains(), 3);
@@ -116,13 +117,25 @@ module.exports = {
         assert.equal(turn.footprints(), 3);
         turn.keepGoing(onlyShotgunScrambler);
         assert.equal(turn.shotguns(), 3);
+        // But that status was from prior to rolls.
         assert.equal(status.brains.length, 0);
         assert.equal(status.footprints.length, 0);
         assert.equal(status.shotguns.length, 0);
+    },
+    'Status should report colors': function() {
+        var turn = unscrambledTurn();
+        turn.keepGoing(onlyBrainScrambler);
+        assert.deepEqual(turn.status().brains, [Color.colors.RED, Color.colors.RED, Color.colors.RED]);
+        turn.keepGoing(onlyFootprintScrambler);
+        assert.deepEqual(turn.status().footprints, [Color.colors.YELLOW, Color.colors.YELLOW, Color.colors.YELLOW]);
+        turn.keepGoing(onlyShotgunScrambler); // Footprints are rolled
+        assert.deepEqual(turn.status().shotguns, [Color.colors.YELLOW, Color.colors.YELLOW, Color.colors.YELLOW]);
     }
-    
-    // FOOT PRINTS ARE NOT USED WHEN ROLLING!!!!!
 };
+
+function unscrambledTurn() {
+    return new TurnFactory().createTurn(new FixedScrambler({value: 100})); // Do not scramble the cup, please.
+}
 
 function assertBrainsAndScore(turn, brains, score) {
     assert.equal(turn.brains(), brains);
